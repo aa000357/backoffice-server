@@ -8,7 +8,6 @@ import java.util.Date;
 public class GameUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="game_user_id")
     private Integer gameUserId;
 
@@ -38,6 +37,13 @@ public class GameUser {
 
     @Column(name="birthday")
     private Date birthday;
+
+    @Column(name = "material_content")
+    private Integer materialContent;
+
+    @Column(name = "order_content")
+    private Integer orderContent;
+
 
     public Integer getGameUserId() {
         return gameUserId;
@@ -119,6 +125,22 @@ public class GameUser {
         this.birthday = birthday;
     }
 
+    public Integer getMaterialContent() {
+        return materialContent;
+    }
+
+    public void setMaterialContent(Integer materialContent) {
+        this.materialContent = materialContent;
+    }
+
+    public Integer getOrderContent() {
+        return orderContent;
+    }
+
+    public void setOrderContent(Integer orderContent) {
+        this.orderContent = orderContent;
+    }
+
     @Override
     public String toString() {
         return "GameUser{" +
@@ -132,6 +154,8 @@ public class GameUser {
                 ", diamond=" + diamond +
                 ", freeDiamond=" + freeDiamond +
                 ", birthday=" + birthday +
+                ", materialContent=" + materialContent +
+                ", orderContent=" + orderContent +
                 '}';
     }
 }
