@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC >
+<tiles-definitions>
+
+    <!-- ####################  layout main   #################### -->
+    <definition name="layoutMain" template="D:\workspace\codec-backoffice\backoffice-server\src\main\java\com\happytuk\jsp\template\index.jsp" >
+        <put-attribute name="bodyClass" value=""/>
+        <put-attribute name="trackcode" value="" />
+        <put-attribute name="header" value="" />
+        <put-attribute name="left" value="/jsp/template/left.html" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer" value="" />
+        <put-attribute name="scripts" value="" />
+        <put-attribute name="trackcode" value="" />
+    </definition>
+
+    <definition name="common15GameMain" extends="layoutMain"  > <!-- preparer="commonMenuPrepare" -->
+        <put-attribute name="bodyClass"  value="page-home"/>
+<!--        <put-attribute name="trackcode" value="/WEB-INF/jsp/common/TrackCode.jsp" />-->
+<!--        <put-attribute name="content" value="/WEB-INF/jsp/game/menu/homepage/index.jsp" />-->
+    </definition>
+
+
+
+</tiles-definitions>

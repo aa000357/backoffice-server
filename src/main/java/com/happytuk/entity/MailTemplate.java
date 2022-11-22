@@ -26,7 +26,7 @@ public class MailTemplate {
     @Column(name = "send_time")
     private Date sendTime;
 
-    @Column(name = "receive_time")
+    @Column(name = "expired_time")
     private Date receiveTime;
 
     @Column(name = "created_time")
@@ -109,7 +109,7 @@ public class MailTemplate {
 
     @Override
     public String toString() {
-        return "MailDraft{" +
+        return "MailTemplate{" +
                 "mailId=" + mailId +
                 ", mailType=" + mailType +
                 ", sender='" + sender + '\'' +

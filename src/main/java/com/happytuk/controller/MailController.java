@@ -3,6 +3,8 @@ package com.happytuk.controller;
 import com.happytuk.dao.MailTemplateDao;
 import com.happytuk.entity.MailTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,20 +18,27 @@ public class MailController {
     @Autowired
     private MailTemplateDao mailTemplateDao;
 
-    @RequestMapping(value = "/getMailTemplate")
+    @GetMapping(value = "/mailtemplate")
     public String getMailTemplate() {
-        Optional<MailTemplate> mailDraft = mailTemplateDao.findById(900);
-        System.out.println(mailDraft.toString());
-        return mailDraft.toString();
+        Optional<MailTemplate> mailTemplate = mailTemplateDao.findById(899);
+        System.out.println(mailTemplate.toString());
+        return mailTemplate.toString();
     }
 
-    @RequestMapping(value = "/getMailTemplateList")
+    @GetMapping(value = "/allmailtemplate")
     public List<MailTemplate> getMailTemplateList() {
         List<MailTemplate> templateList = mailTemplateDao.findAll();
         Integer count = templateList.size();
         System.out.println("count : " + count);
 
         return templateList;
+    }
+
+    @PutMapping(value = "setmailtemplate")
+    public String setMailTemplate(){
+
+
+        return "xxx";
     }
 
 }
