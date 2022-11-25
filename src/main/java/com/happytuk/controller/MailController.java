@@ -1,6 +1,8 @@
 package com.happytuk.controller;
 
+import com.happytuk.dao.MailTemplateDao;
 import com.happytuk.entity.MailTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,6 +14,9 @@ import java.util.Optional;
 public class MailController {
 
     private static List<MailTemplate> fakeDb = new ArrayList<>();
+
+    @Autowired
+    private MailTemplateDao mailTemplateDao;
 
 
     @PostMapping(value = "/mailtemplate")
@@ -33,14 +38,14 @@ public class MailController {
 
     @GetMapping(value = "/mailtemplate")
     public String getMailTemplate() {
-        Optional<MailTemplate> mailTemplate = null;
+        Optional<MailTemplate> mailTemplate = mailTemplateDao.findById(899);
         System.out.println(mailTemplate.toString());
         return mailTemplate.toString();
     }
 
     @GetMapping(value = "/allmailtemplate")
     public List<MailTemplate> getMailTemplateList() {
-        List<MailTemplate> templateList = null;
+        List<MailTemplate> templateList = mailTemplateDao.findAll();
         Integer count = templateList.size();
         System.out.println("count : " + count);
 
