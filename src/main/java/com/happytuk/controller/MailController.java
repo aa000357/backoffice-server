@@ -4,7 +4,10 @@ import com.happytuk.dao.MailTemplateDao;
 import com.happytuk.entity.MailTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -52,7 +55,20 @@ public class MailController {
         return templateList;
     }
 
+    @PostMapping(value = "/mailtemp") //要打的網址
+    public List<MailTemplate> allmailtemp(){ //傳到html畫面的資料型態
+
+        List<MailTemplate> templateList = mailTemplateDao.findAll(); //取得資料庫mailTemplateDao資料
+
+//        ModelAndView mav = new ModelAndView("mail-list"); //顯示的畫面 mail-listhtml        mav.addObject(templateList);
+        System.out.println(templateList);
+
+        return templateList; //畫面上show的內容
+    }
+
+
     @PutMapping(value = "setmailtemplate")
+    @ResponseBody
     public String setMailTemplate(){
 
 

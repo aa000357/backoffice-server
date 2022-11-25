@@ -42,11 +42,6 @@
         </style>
 </head>
 
-
-<!-- <div class="card-body card-block">
-    <input class="default" type="text"/>
-</div> -->
-
 <body>
     <!-- Left Panel -->
     <div w3-include-html="left.html"></div>
@@ -85,7 +80,7 @@
                                         </select>
                                     </div>
                                     <div><input class="form-control " type="text"/></div>
-                                    <button style="padding: .25rem 3.5rem;" type="button" class="btn btn-primary btn-sm fa fa-search">查詢</button>
+                                    <button id = "seach" style="padding: .25rem 3.5rem;" type="button" class="btn btn-primary btn-sm fa fa-search">查詢</button>
                                 </div>
 
                                 <div class="row form-group">
@@ -109,7 +104,8 @@
                                                     <th>信件狀態<button type="button" class="btn btn-link btn-sm fa fa-caret-square-o-down"></button></th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id = "row">
+<!--                                                foreach塞入資料-->
                                                 <tr>
                                                     <td>2022-10-19 00:00:00</td>
                                                     <td>2022-10-19 00:00:00</td>
@@ -121,39 +117,39 @@
                                                     </td>
                                                     <td>未發送 <button type="button" class="btn btn-secondary btn-sm">取消</button></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>2022-10-20 00:00:00</td>
-                                                    <td>2022-10-20 00:00:00</td>
-                                                    <td>2022-10-20 00:00:00</td>
-                                                    <td>12345678</td>
-                                                    <td>我是標題</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-link btn-sm " onclick="window.open('mail-info.html', '信件內容', config='height=920,width=880');">查看</button>
-                                                    </td>
-                                                    <td>已發送 <button disabled="disabled" type="button" class="btn btn-secondary btn-sm">取消</button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2022-10-20 00:00:00</td>
-                                                    <td>2022-10-20 00:00:00</td>
-                                                    <td>2022-10-20 00:00:00</td>
-                                                    <td>12345678</td>
-                                                    <td>我是標題</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-link btn-sm " onclick="window.open('mail-info.html', '信件內容', config='height=920,width=880');">查看</button>
-                                                    </td>
-                                                    <td>已發送 <button disabled="disabled" type="button" class="btn btn-secondary btn-sm">取消</button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2022-10-20 00:00:00</td>
-                                                    <td>2022-10-20 00:00:00</td>
-                                                    <td>2022-10-20 00:00:00</td>
-                                                    <td>12345678</td>
-                                                    <td>我是標題</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-link btn-sm " onclick="window.open('mail-info.html', '信件內容', config='height=920,width=880');">查看</button>
-                                                    </td>
-                                                    <td>已發送 <button disabled="disabled" type="button" class="btn btn-secondary btn-sm">取消</button></td>
-                                                </tr>
+<!--                                                <tr>-->
+<!--                                                    <td>2022-10-20 00:00:00</td>-->
+<!--                                                    <td>2022-10-20 00:00:00</td>-->
+<!--                                                    <td>2022-10-20 00:00:00</td>-->
+<!--                                                    <td>12345678</td>-->
+<!--                                                    <td>我是標題</td>-->
+<!--                                                    <td>-->
+<!--                                                        <button type="button" class="btn btn-link btn-sm " onclick="window.open('mail-info.html', '信件內容', config='height=920,width=880');">查看</button>-->
+<!--                                                    </td>-->
+<!--                                                    <td>已發送 <button disabled="disabled" type="button" class="btn btn-secondary btn-sm">取消</button></td>-->
+<!--                                                </tr>-->
+<!--                                                <tr>-->
+<!--                                                    <td>2022-10-20 00:00:00</td>-->
+<!--                                                    <td>2022-10-20 00:00:00</td>-->
+<!--                                                    <td>2022-10-20 00:00:00</td>-->
+<!--                                                    <td>12345678</td>-->
+<!--                                                    <td>我是標題</td>-->
+<!--                                                    <td>-->
+<!--                                                        <button type="button" class="btn btn-link btn-sm " onclick="window.open('mail-info.html', '信件內容', config='height=920,width=880');">查看</button>-->
+<!--                                                    </td>-->
+<!--                                                    <td>已發送 <button disabled="disabled" type="button" class="btn btn-secondary btn-sm">取消</button></td>-->
+<!--                                                </tr>-->
+<!--                                                <tr>-->
+<!--                                                    <td>2022-10-20 00:00:00</td>-->
+<!--                                                    <td>2022-10-20 00:00:00</td>-->
+<!--                                                    <td>2022-10-20 00:00:00</td>-->
+<!--                                                    <td>12345678</td>-->
+<!--                                                    <td>我是標題</td>-->
+<!--                                                    <td>-->
+<!--                                                        <button type="button" class="btn btn-link btn-sm " onclick="window.open('mail-info.html', '信件內容', config='height=920,width=880');">查看</button>-->
+<!--                                                    </td>-->
+<!--                                                    <td>已發送 <button disabled="disabled" type="button" class="btn btn-secondary btn-sm">取消</button></td>-->
+<!--                                                </tr>-->
                                             </tbody>
                                         </table>
                                     </div> <!-- /.table-stats -->
@@ -191,20 +187,52 @@
                                 <label>頁</label>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
             <!-- .animated -->
         </div>
         <!-- /.content -->
-        
-
     <div class="clearfix"></div>
     <script>w3.includeHTML();</script>
     <!-- 自定義樣式 -->
     <script>
         $("input.default").daterangepicker();
     </script>
+
+    <script type="text/javascript">
+
+<!--        $.ajax({-->
+<!--            url: '',                        // url位置-->
+<!--            type: 'post',                   // post/get-->
+<!--            data: { querytag: data },       // 輸入的資料-->
+<!--            error: function (xhr) { },      // 錯誤後執行的函數-->
+<!--            success: function (response) { }// 成功後要執行的函數-->
+<!--        });-->
+
+        $(document).ready(function(){
+        $("#seach").click(function(){
+        mailtemplist = $.ajax({
+                            method : "POST",
+                            url : "/mail/mailtemp",
+                            data : {
+                                created_time:"3"
+                            },
+                            success: res =>{
+                                console.log(res)
+                                },
+                            error: err =>{
+                                console.log(err)
+                                },
+                        });
+						});
+
+        });
+
+
+
+    </script>
+
 </body>
 </html>
