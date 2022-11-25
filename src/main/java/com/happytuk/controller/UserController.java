@@ -13,26 +13,6 @@ public class UserController {
 
     private static final List<GameUser> FAKE_DB_4_GAMEUSER = new ArrayList<>();
 
-    static {
-        String[] name = {"梁謙", "吳宇丞", "范姜浩", "謝雁行", "獨沽九件"};
-        for(int i = 0 ; i < name.length ; i++) {
-            GameUser user = new GameUser();
-            user.setGameUserId(1);
-            user.setNickname("梁謙");
-            user.setCafeName("悠閒咖啡廳");
-            user.setFilename("File");
-            user.setInvitationCode("SUPER888");
-            user.setExperience((int)(Math.random() * 1000 - 50 + 3));
-            user.setCoin((int)(Math.random() * 10000 - 70 + 1003));
-            user.setDiamond(0);
-            user.setFreeDiamond(1000);
-            user.setBirthday(null);
-            user.setMaterialContent(1);
-            user.setOrderContent(2);
-            FAKE_DB_4_GAMEUSER.add(user);
-        }
-    }
-
     @GetMapping
     public List<GameUser> getUser(){
         return FAKE_DB_4_GAMEUSER;
