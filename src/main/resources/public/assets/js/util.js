@@ -3,7 +3,7 @@ function send(url, method, data, callback){
 	$.ajax({
         url: url,
         type: method,
-        data: data,
+        data: data === undefined ? {} : data,
         success: function(data) {
     		callback(data);
         },
