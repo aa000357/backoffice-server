@@ -12,12 +12,4 @@ import java.util.List;
 @Service
 @Transactional
 public class MailTemplateServiceImpl implements MailTemplateService {
-
-    @Autowired
-    MailTemplateDao mailTemplateDao;
-
-    @Override
-    public List<MailTemplate> findAll() {
-        return mailTemplateDao.findAll();
-    }
 }

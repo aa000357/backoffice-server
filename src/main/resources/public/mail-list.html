@@ -80,7 +80,7 @@
                                         </select>
                                     </div>
                                     <div><input class="form-control " type="text"/></div>
-                                    <button id = "seach" style="padding: .25rem 3.5rem;" type="button" class="btn btn-primary btn-sm fa fa-search">查詢</button>
+                                    <button id = "search" style="padding: .25rem 3.5rem;" type="button" class="btn btn-primary btn-sm fa fa-search">查詢</button>
                                 </div>
 
                                 <div class="row form-group">
@@ -212,18 +212,18 @@
 <!--        });-->
 
         $(document).ready(function(){
-        $("#seach").click(function(){
+        $("#search").click(function(){
         mailtemplist = $.ajax({
                             method : "POST",
                             url : "/mail/mailtemp",
                             data : {
-                                created_time:"3"
+                                mail_type:"3"
                             },
                             success: res =>{
-                                console.log(res)
+                                console.log("ok")
                                 },
                             error: err =>{
-                                console.log(err)
+                                console.log("error")
                                 },
                         });
 						});

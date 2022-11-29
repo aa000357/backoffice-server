@@ -31,11 +31,6 @@ public class MailController {
     @GetMapping(value = "/mailtemplate1")
     public MailTemplate getA() {
 
-//        for (int i = 0 ; i < fakeDb.size() : i++)
-//        {
-//            fakeDb.get(i).getMailType()
-//        }
-
         return fakeDb.size() > 0 ? fakeDb.get(0) : null;
     }
 
