@@ -1,13 +1,13 @@
 package com.happytuk.controller;
 
+import com.happytuk.dao.ExcelMailSenderDao;
 import com.happytuk.dao.MailTemplateDao;
+import com.happytuk.entity.ExcelMailSender;
 import com.happytuk.entity.MailTemplate;
+import com.happytuk.entity.UserMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,11 +22,32 @@ public class MailController {
     private MailTemplateDao mailTemplateDao;
 
 
+//    @PostMapping(value = "/mailtemplate")
+//    public String saveMailTemplate(@RequestBody MailTemplate mailTemplate) {
+//        fakeDb.add(mailTemplate);
+//        return "ok";
+//    }
+
     @PostMapping(value = "/mailtemplate")
-    public String saveMailTemplate(@RequestBody MailTemplate mailTemplate) {
-        fakeDb.add(mailTemplate);
+    public String saveMailTemplate(@RequestBody MailTemplate mailTemplate, UserMail userMail) {
+        MailTemplate newTemplate = new MailTemplate();
+
+        newTemplate.setMailId(mailTemplate.getMailId());
+        newTemplate.setMailType(mailTemplate.getMailType());
+        newTemplate.setSender(mailTemplate.getSender());
+        newTemplate.setMailName(mailTemplate.getMailName());
+        newTemplate.setMailNote(mailTemplate.getMailNote());
+        newTemplate.setSendTime(mailTemplate.getSendTime());
+        newTemplate.setExpiredTime(mailTemplate.getExpiredTime());
+        newTemplate.setCreatedTime(mailTemplate.getCreatedTime());
+        newTemplate.setUpdatedTime(mailTemplate.getUpdatedTime());
+
+//        mailTemplateDao.setMailId();
+
         return "ok";
     }
+
+
 
     @GetMapping(value = "/mailtemplate1")
     public MailTemplate getA() {
@@ -56,18 +77,11 @@ public class MailController {
         List<MailTemplate> templateList = mailTemplateDao.findAll(); //取得資料庫mailTemplateDao資料
 
 //        ModelAndView mav = new ModelAndView("mail-list"); //顯示的畫面 mail-listhtml        mav.addObject(templateList);
-        System.out.println(templateList);
 
-        return templateList; //畫面上show的內容
-    }
+        List<MailTemplate> templateList2 = mailTemplateDao.findByMailType(3);
+        System.out.println(templateList2);
 
-
-    @PutMapping(value = "setmailtemplate")
-    @ResponseBody
-    public String setMailTemplate(){
-
-
-        return "xxx";
+        return templateList2; //畫面上show的內容
     }
 
 }

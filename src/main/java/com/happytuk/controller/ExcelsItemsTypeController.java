@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 
 import java.util.List;
@@ -26,6 +25,14 @@ public class ExcelsItemsTypeController {
         System.out.println("items count : " +count);
 
         return itemsList;
+    }
+
+    @GetMapping(value = "/itemname")
+    public String itemType(){
+        Optional<ExcelItemsType> itemName = excelsItemTypeDao.findById(100);
+        System.out.println("itemName : " + itemName);
+
+        return itemName.toString();
     }
 
 

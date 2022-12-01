@@ -104,8 +104,14 @@
                                                     <th>信件狀態<button type="button" class="btn btn-link btn-sm fa fa-caret-square-o-down"></button></th>
                                                 </tr>
                                             </thead>
+                                            <div>
+                                                ${mailtemplist}
+                                            </div>
                                             <tbody id = "row">
 <!--                                                foreach塞入資料-->
+
+
+
                                                 <tr>
                                                     <td>2022-10-19 00:00:00</td>
                                                     <td>2022-10-19 00:00:00</td>
@@ -202,18 +208,9 @@
     </script>
 
     <script type="text/javascript">
-
-<!--        $.ajax({-->
-<!--            url: '',                        // url位置-->
-<!--            type: 'post',                   // post/get-->
-<!--            data: { querytag: data },       // 輸入的資料-->
-<!--            error: function (xhr) { },      // 錯誤後執行的函數-->
-<!--            success: function (response) { }// 成功後要執行的函數-->
-<!--        });-->
-
         $(document).ready(function(){
         $("#search").click(function(){
-        mailtemplist = $.ajax({
+         mailtemplist = $.ajax({
                             method : "POST",
                             url : "/mail/mailtemp",
                             data : {
@@ -221,6 +218,7 @@
                             },
                             success: res =>{
                                 console.log("ok")
+
                                 },
                             error: err =>{
                                 console.log("error")

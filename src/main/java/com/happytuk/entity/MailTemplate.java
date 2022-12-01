@@ -27,7 +27,7 @@ public class MailTemplate {
     private Date sendTime;
 
     @Column(name = "expired_time")
-    private Date receiveTime;
+    private Date expiredTime;
 
     @Column(name = "created_time")
     private Date createdTime;
@@ -83,12 +83,12 @@ public class MailTemplate {
         this.sendTime = sendTime;
     }
 
-    public Date getReceiveTime() {
-        return receiveTime;
+    public Date getExpiredTime() {
+        return expiredTime;
     }
 
-    public void setReceiveTime(Date receiveTime) {
-        this.receiveTime = receiveTime;
+    public void setExpiredTime(Date expiredTime) {
+        this.expiredTime = expiredTime;
     }
 
     public Date getCreatedTime() {
@@ -116,7 +116,7 @@ public class MailTemplate {
                 ", mailName='" + mailName + '\'' +
                 ", mailNote='" + mailNote + '\'' +
                 ", sendTime=" + sendTime +
-                ", receiveTime=" + receiveTime +
+                ", expiredTime=" + expiredTime +
                 ", createdTime=" + createdTime +
                 ", updatedTime=" + updatedTime +
                 '}';
