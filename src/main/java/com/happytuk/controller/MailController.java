@@ -18,8 +18,6 @@ public class MailController {
 
     private static List<MailTemplate> fakeDb = new ArrayList<>();
 
-    @Autowired
-    private MailTemplateDao mailTemplateDao;
 
 
     @PostMapping(value = "/mailtemplate")
@@ -36,14 +34,14 @@ public class MailController {
 
     @GetMapping(value = "/mailtemplate")
     public String getMailTemplate() {
-        Optional<MailTemplate> mailTemplate = mailTemplateDao.findById(899);
+        Optional<MailTemplate> mailTemplate = null;
         System.out.println(mailTemplate.toString());
         return mailTemplate.toString();
     }
 
     @GetMapping(value = "/allmailtemplate")
     public List<MailTemplate> getMailTemplateList() {
-        List<MailTemplate> templateList = mailTemplateDao.findAll();
+        List<MailTemplate> templateList = new ArrayList<>();
         Integer count = templateList.size();
         System.out.println("count : " + count);
 
@@ -53,7 +51,7 @@ public class MailController {
     @PostMapping(value = "/mailtemp") //要打的網址
     public List<MailTemplate> allmailtemp(){ //傳到html畫面的資料型態
 
-        List<MailTemplate> templateList = mailTemplateDao.findAll(); //取得資料庫mailTemplateDao資料
+        List<MailTemplate> templateList = new ArrayList<>(); //取得資料庫mailTemplateDao資料
 
 //        ModelAndView mav = new ModelAndView("mail-list"); //顯示的畫面 mail-listhtml        mav.addObject(templateList);
         System.out.println(templateList);

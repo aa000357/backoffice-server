@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,12 +17,11 @@ import java.util.Optional;
 @RequestMapping("/item")
 public class ExcelsItemsTypeController {
 
-    @Autowired
-    private ExcelsItemTypeDao excelsItemTypeDao;
+
 
     @GetMapping(value = "/list")
     public List<ExcelItemsType> getItemList() {
-        List<ExcelItemsType> itemsList = excelsItemTypeDao.findAll();
+        List<ExcelItemsType> itemsList = new ArrayList<>();
         Integer count = itemsList.size();
         System.out.println("items count : " +count);
 

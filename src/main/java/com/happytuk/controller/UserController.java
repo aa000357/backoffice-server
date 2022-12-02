@@ -10,8 +10,7 @@ import java.util.Optional;
 @RestController
 public class UserController {
 
-    @Autowired
-    private GameUserDao gameUserDao;
+
 
     @GetMapping("/user/{id}")
     public String getUser(@PathVariable("id") String id) {
@@ -38,7 +37,7 @@ public class UserController {
     }
     @RequestMapping(value = "/getGameUser")
     public String getGameUser() {
-        Optional<GameUser> gameUser = gameUserDao.findById(70);
+        Optional<GameUser> gameUser = null;
         System.out.println(gameUser.toString());
 
         return gameUser.toString();
