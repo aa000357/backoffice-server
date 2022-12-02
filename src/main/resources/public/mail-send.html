@@ -22,6 +22,7 @@
     <script src="assets/js/plugins.js"></script>
     <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="assets/js/util.js"></script>
 
     <!-- 日期時間選擇器 -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -175,14 +176,8 @@
                             <div class="row form-group">
                                 <div class="col col-md-3"><label for="select" class=" form-control-label">寄件人</label></div>
                                 <div class="col-12 col-md-9">
-                                    <select name="select" id="select" class="form-control">
-                                        <option value="0">梁謙</option>
-                                        <option value="1" >吳宇丞</option>
-                                        <option value="2" >范姜浩</option>
-                                        <option value="3" >謝雁行</option>
-                                        <option value="4" >商城購買</option>
-                                        <option value="5" >營運團隊</option>
-                                        <option value="6" >系統更新</option>
+                                    <select name="select" id="sender_list" class="form-control">
+
                                     </select>
                                 </div>
                             </div>
@@ -241,6 +236,14 @@
         }
       });
     });
+
+    function genOption(data){
+        for(let i = 0 ; i < data.length ; i++) {
+            $('#sender_list').append("<option value='" + i + "'>" + data[i] + "</option>");
+        }
+    }
+
+            send("/senders", "GET", {}, genOption);
     </script>
 </body>
 </html>

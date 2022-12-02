@@ -13,17 +13,18 @@ import java.util.*;
 @RestController
 public class TestController {
 
-    @RequestMapping(value = "/roleName")
-    public Map<String, String> getRoleName() {
-        Map<String, String> roleData = new HashMap<>();
-        roleData.put("0", "梁謙");
-        roleData.put("1", "吳宇丞");
-        roleData.put("2", "范姜浩");
-        roleData.put("3", "謝雁行");
-        roleData.put("4", "商城購買");
-        roleData.put("5", "營運團隊");
-        roleData.put("6", "系統更新");
-        return roleData;
+    @RequestMapping(value = "/senders")
+    public List<String> getSenders() {
+        List<String> senderList = new ArrayList<>();
+        senderList.add("梁謙");
+        senderList.add("吳宇丞");
+        senderList.add("范姜浩");
+        senderList.add("謝雁行");
+        senderList.add("商城購買");
+        senderList.add("營運團隊");
+        senderList.add("系統更新");
+        senderList.add("Wendy");
+        return senderList;
     }
 
 }
