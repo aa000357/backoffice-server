@@ -239,11 +239,11 @@
 
     function genOption(data){
         for(let i = 0 ; i < data.length ; i++) {
-            $('#sender_list').append("<option value='" + i + "'>" + data[i] + "</option>");
+            $('#sender_list').append("<option value='" + data[i].senderId + "'>" + data[i].senderZhTw + "</option>");
         }
     }
 
-            send("/senders", "GET", {}, genOption);
+            send("/sender", "GET", {}, genOption);
     </script>
 </body>
 </html>
