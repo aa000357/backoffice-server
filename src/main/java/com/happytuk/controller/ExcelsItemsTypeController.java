@@ -28,11 +28,12 @@ public class ExcelsItemsTypeController {
     }
 
     @GetMapping(value = "/itemname")
-    public String itemType(){
-        Optional<ExcelItemsType> itemName = excelsItemTypeDao.findById(100);
-        System.out.println("itemName : " + itemName);
+    public Optional<ExcelItemsType> itemType(Integer itemTypeId){
 
-        return itemName.toString();
+        Optional<ExcelItemsType> itemName;
+        itemName = excelsItemTypeDao.findById(itemTypeId);
+
+        return  itemName;
     }
 
 
