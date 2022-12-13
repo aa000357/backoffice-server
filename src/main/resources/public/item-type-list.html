@@ -64,7 +64,7 @@
     </div>
     <div class="pop-up-action flex justifyContent">
       <button class="btn btn-primary btn-sm" onclick='closeModal()'>取消</button>
-      <button class="btn btn-primary btn-sm" onclick='closeModal()'>確定送出</button>
+      <button class="btn btn-primary btn-sm" onclick='aaa()' id = "send">確定送出</button>
     </div>
 
       <!-- 自定義樣式 -->
@@ -94,39 +94,60 @@
     }
 
 <!--     取得道具列表-->
-    function getItemList(data){
+    function itemList(data){
         for(let i = 0 ; i < data.length ; i++) {
-            $('#item_list').append(" <tr>" + "<th scope=" + '"' + "row" + '"' + ">"  + data[i].itemTypeId + "</th>"  +
+            $('#item_list').append(" <tr>" + "<th scope=" + '"' + "row"  + '"' + ">"  + data[i].itemTypeId + "</th>"  +
             "<td>" + data[i].itemName + "</td>" +
 	        "<td><input type=" + '"' + "text" + '"' + "id=" + '"' + "text-input" + '"' + "name=" + '"' + "text-input" + '"'+
-	        "placeholder=" + '"' + "0" + '"' + "class=" + '"' + "form-control col-12" + '"' + "></td>" + "</tr>");
+	        "placeholder=" + '"' + "0" + '"' + "class=" + '"' + "form-control col-12 " + data[i].itemTypeId + '"' + "</td>" + "</tr>");
 	    }
     }
-    send("/item/list", "GET", {}, getItemList);
+    send("/item/list", "GET", {}, itemList);
 
 <!--條件搜尋-->
     var btn = document.getElementById('search_btn');
 
     btn.onclick = function(){
         var item = document.getElementById('search_item').value;
-        getItemName(item)
+
+        if(item > 0){
+            getItemName(item)
+
+        }else if (item = ""){
+           getItemList()
+        }
+
     };
 
     function getItemName(item){
+            $.ajax({
+                url: "/item/itemname",
+                data:{
+                itemTypeId : item
+                },
+                success: function(res){
+                    console.log(res)
+                    itemNane = res
+                    updateList(itemNane)
+                },
+                error: function(){
+                    alert('發生錯誤')
+                }
+            })
+        }
+
+    function getItemList(){
         $.ajax({
-            url: "/item/itemname",
-            data:{
-            itemTypeId : item
-            },
-            success: function(res){
-                console.log(res)
-                itemNane = res
-                updateList(itemNane)
-            },
-            error: function(){
-                alert('發生錯誤')
-            }
-        })
+                url: "/item/list",
+                success: function(res){
+                    console.log(res)
+                    items = res
+                    itemList(items)
+                },
+                error: function(){
+                    alert('發生錯誤')
+                }
+            })
     }
 
     function updateList(data){
@@ -141,9 +162,17 @@
             $('#item_list').append(" <tr>" + "<th scope=" + '"' + "row" + '"' + ">"  + itemId + "</th>"  +
             "<td>" + itemName + "</td>" +
 	        "<td><input type=" + '"' + "text" + '"' + "id=" + '"' + "text-input" + '"' + "name=" + '"' + "text-input" + '"'+
-	        "placeholder=" + '"' + "0" + '"' + "class=" + '"' + "form-control col-12" + '"' + "></td>" + "</tr>");
+	        "placeholder=" + '"' + "0" + '"' + "class=" + '"' + "form-control col-12" + '"' + " id = " + '"' + data[i].itemTypeId + '"' + ">" + "</td>" + "</tr>");
         }
 
+
+    }
+
+<!--    send-->
+    function aaa(){
+        var testId = document.getElementByClassName('100');
+
+<!--        window.opener.document.getElementById('LinkButton1').click();-->
 
     }
 
