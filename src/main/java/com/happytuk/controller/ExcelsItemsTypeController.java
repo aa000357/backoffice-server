@@ -22,7 +22,6 @@ public class ExcelsItemsTypeController {
     public List<ExcelItemsType> getItemList() {
         List<ExcelItemsType> itemsList = excelsItemTypeDao.findAll();
         Integer count = itemsList.size();
-        System.out.println("items count : " +count);
 
         return itemsList;
     }

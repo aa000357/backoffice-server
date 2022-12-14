@@ -64,7 +64,7 @@
     </div>
     <div class="pop-up-action flex justifyContent">
       <button class="btn btn-primary btn-sm" onclick='closeModal()'>取消</button>
-      <button class="btn btn-primary btn-sm" onclick='submit()' id = "send">確定送出</button>
+      <button class="btn btn-primary btn-sm" onclick='enter()' id = "send">確定送出</button>
     </div>
 
       <!-- 自定義樣式 -->
@@ -169,9 +169,9 @@
 
     }
 
-<!--    submit-->
+<!--    enter-->
 
-    function submit(){
+    function enter(){
         $.ajax({
                 url: "/item/list",
                 success: function(res){
@@ -186,12 +186,14 @@
     }
 
     function inputAllItems(data){
-
+        var itemId,itemCount,obj;
         for(let i = 0 ; i < data.length ; i++) {
-<!--            var itemId = data[i].itemTypeId;-->
-            if(i < 10 ){
+            itemId = data[i].itemTypeId;
+            itemCount = document.getElementsByClassName(data[i].itemTypeId)[0].value;
 
-                var testInput = document.getElementsByClassName(data[i].itemTypeId);
+            if(itemCount > 0){
+                alert("道具" + itemId + "數量" + itemCount);
+                obj.add(new Option("itemId","itemCount"));
             }
 
 	    }
