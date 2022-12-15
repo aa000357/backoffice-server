@@ -108,9 +108,9 @@
                     <div class="card-body card-block">
                         <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label">伺服器</label></div>
+                                <div class="col col-md-3"><label class=" form-control-label">伺服器</label></div>
                                 <div class="col-12 col-md-9">
-                                    <select name="select" id="select" class="form-control">
+                                    <select name="select" id="selectServ" class="form-control">
                                         <option value="0">台港澳</option>
                                         <option value="1" selected>測試服</option>
                                     </select>
@@ -119,7 +119,7 @@
 
                             <div class="row form-group">
                                 <div class="col col-md-3"><label class=" form-control-label">發送道具</label></div>
-                                <div class="col-12 col-md-9">                                    
+                                <div class="col-12 col-md-9" id = "open-item-list">
                                     <button class="btn btn-primary btn-sm" onclick='showModal()'>
                                         <a style="color:#fff ;" href="#" onclick="window.open('item-type-list.html', '道具列表', config='height=600,width=1200');">開新視窗</a>
                                     </button>
@@ -128,40 +128,30 @@
 
                             <div class="row form-group">
                                 <div class="col col-md-3"><label class=" form-control-label"></label></div>
-                                <div class="col-12 col-md-9 display-flex">                                    
+                                    <div class = "table-stats col-md-9">
                                     <form action="#" method="post" class="form-inline ">
-                                        
-                                        <div style="text-align: center" class="form-group">
-                                            <label for="exampleInputName2" class="pr-1  form-control-label">道具名稱</label>
-                                            <input type="email" disabled="disabled" id="exampleInputEmail2" placeholder="金幣(遊戲幣)" required="" class="form-control">
-                                            <input type="email" disabled="disabled" id="exampleInputEmail2" placeholder="花冠(免費鑽)" required="" class="form-control">
-                                        </div>
-                                        <div style="text-align: center" class="form-group">
-                                            <label for="exampleInputEmail2" class="px-1  form-control-label">道具數量</label>
-                                            <input type="email" id="exampleInputEmail2" placeholder="100" required="" class="form-control">
-                                            <input type="email" id="exampleInputEmail2" placeholder="100" required="" class="form-control">
-                                        </div>
-                                        <div style="text-align: center" class="form-group">
-                                            <label for="exampleInputEmail2" class="px-1  form-control-label">修改</label>
-                                            <button style="color: #28a745;border:0cm" type="button" class="form-control ti-pencil-alt" onclick="alert('修改成功')"></button>
-                                            <button style="color: #28a745;border:0cm" type="button" class="form-control ti-pencil-alt" onclick="alert('修改成功')"></button>
-                                        </div>
-                                        <div style="text-align: center" class="form-group">
-                                            <label for="exampleInputEmail2" class="px-1  form-control-label">刪除</label>
-                                            <button style="color: #dc3545;border:0cm" type="button" class="form-control ti-trash" onclick="alert('刪除成功')"></button>
-                                            <button style="color: #dc3545;border:0cm" type="button" class="form-control ti-trash" onclick="alert('刪除成功')"></button>
-                                        </div>
-                                        
+                                        <table class="table" >
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">道具名稱</th>
+                                                <th scope="col">道具數量</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id = "item_list">
+                                            </tbody>
+                                        </table>
                                     </form>
                                 </div>
                             </div>
 
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">標題</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="" class="form-control"></div>
+                                <div class="col col-md-3"><label class=" form-control-label">標題</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="caption" name="text-input" placeholder="" class="form-control"></div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label">寄件人</label></div>
+                                <div class="col col-md-3"><label class=" form-control-label">寄件人</label></div>
                                 <div class="col-12 col-md-9">
                                     <select name="select" id="sender_list" class="form-control">
 
@@ -170,44 +160,47 @@
                             </div>
 
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">內文</label></div>
-                                <div class="col-12 col-md-9"><textarea name="textarea-input" id="textarea-input" rows="9" placeholder="" class="form-control"></textarea></div>
+                                <div class="col col-md-3"><label class=" form-control-label">內文</label></div>
+                                <div class="col-12 col-md-9"><textarea name="textarea-input" id="letter-content" rows="9" placeholder="" class="form-control"></textarea></div>
                             </div>
                             
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">發送時間</label></div>
-                                <div class="col-12 col-md-3"><input class="form-control datepicker" type="text" ></div>
+                                <div class="col col-md-3"><label lass=" form-control-label">發送時間</label></div>
+                                <div class="col-12 col-md-3"><input class="form-control datepicker" type="text" id = "send-time"></div>
                             </div>
 
                             <div class="row form-group ">
-                                <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">領取時限</label></div>
+                                <div class="col col-md-3"><label class=" form-control-label">領取時限</label></div>
                                 <div class="col-12 col-md-3 display-flex">
-                                    <input class="form-control datepicker" type="text" >
+                                    <input class="form-control datepicker" type="text" id="expired-time">
 
-                                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">永久</label></div>
+                                    <div class="col col-md-3"><label  class=" form-control-label">永久</label></div>
 
                                     <!-- <label  class="form-control-label">永久</label> -->
                                     <div class="form-check-inline form-check ">
-                                        <label for="inline-checkbox1" class="form-check-label display-flex">
-                                            <input type="checkbox" id="inline-checkbox1" name="inline-checkbox1" value="option1" class="form-check-input">
+                                        <label  class="form-check-label display-flex">
+                                            <input type="checkbox" id="forever-checkbox" name="inline-checkbox1" value="option1" class="form-check-input">
                                         </label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row form-group ">
-                                <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">新手可領</label></div>
+                                <div class="col col-md-3"><label  class=" form-control-label">新手可領</label></div>
                                 <div class="col-12 col-md-3 display-flex">
                                     <div class="form-check-inline form-check ">
-                                        <label for="inline-checkbox1" class="form-check-label display-flex">
-                                            <input type="checkbox" id="inline-checkbox1" name="inline-checkbox1" value="option1" class="form-check-input">
+                                        <label  class="form-check-label display-flex">
+                                            <input type="checkbox" id="new-user-can-get" name="inline-checkbox1" value="option1" class="form-check-input">
                                         </label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="card-body">
-                                <button style="float:right" type="button" class="btn btn-primary btn-sm" onclick="window.location.assign('mail-send-all-preview.html', '信件發送預覽');">預覽</button>
+                                <button id = "preview" style="float:right" type="button" class="btn btn-primary btn-sm" onclick="preview()">預覽</button>
+                                <button id = "save" style="float:right" type="button" class="btn btn-primary btn-sm" onclick="save()" hidden="hidden">發送</button>
+                                <label style="float:right" class=" form-control-label">&emsp;</label>
+                                <button id = "modify" style="float:right" type="button" class="btn btn-primary btn-sm" onclick="modify()" hidden="hidden">修改</button>
                             </div>
                         </form>
                     </div>
@@ -240,6 +233,50 @@
             }
 
             send("/sender", "GET", {}, genOption);
+
+<!-- 刪除道具-->
+
+
+
+<!--    預覽-->
+    function preview(){
+        document.getElementById("selectServ").disabled = true;
+        document.getElementById("open-item-list").hidden = true;
+        document.getElementById("caption").readOnly = true;
+        document.getElementById("sender_list").disabled = true;
+        document.getElementById("letter-content").readOnly = true;
+        document.getElementById("send-time").readOnly = true;
+        document.getElementById("expired-time").readOnly = true;
+        document.getElementById("forever-checkbox").disabled = true;
+        document.getElementById("new-user-can-get").disabled = true;
+
+        $('.item-count').attr("readonly",true);
+        $('.ti-trash').attr("hidden","hidden");
+
+        $('#preview').attr("hidden","hidden");
+        $('#save').removeAttr("hidden");
+        $('#modify').removeAttr("hidden");
+    }
+
+<!--    修改-->
+    function modify(){
+        document.getElementById("selectServ").disabled = false;
+        document.getElementById("open-item-list").hidden = false;
+        document.getElementById("caption").readOnly = false;
+        document.getElementById("sender_list").disabled = false;
+        document.getElementById("letter-content").readOnly = false;
+        document.getElementById("send-time").readOnly = false;
+        document.getElementById("expired-time").readOnly = false;
+        document.getElementById("forever-checkbox").disabled = false;
+        document.getElementById("new-user-can-get").disabled = false;
+
+        $('.item-count').removeAttr("readonly");
+        $('.ti-trash').removeAttr("hidden");
+
+        $('#preview').removeAttr("hidden");
+        $('#save').attr("hidden","hidden");
+        $('#modify').attr("hidden","hidden");
+    }
         </script>
 </body>
 </html>

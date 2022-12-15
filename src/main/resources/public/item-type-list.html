@@ -64,7 +64,7 @@
     </div>
     <div class="pop-up-action flex justifyContent">
       <button class="btn btn-primary btn-sm" onclick='closeModal()'>取消</button>
-      <button class="btn btn-primary btn-sm" onclick='enter()' id = "send">確定送出</button>
+      <button class="btn btn-primary btn-sm" onclick='sendItemList()' id = "send">確定送出</button>
     </div>
 
       <!-- 自定義樣式 -->
@@ -96,10 +96,9 @@
 <!--     取得道具列表-->
     function itemList(data){
         for(let i = 0 ; i < data.length ; i++) {
-            $('#item_list').append(" <tr>" + "<th scope=" + '"' + "row"  + '"' + ">"  + data[i].itemTypeId + "</th>"  +
+            $('#item_list').append(" <tr class='item_row'>" + "<th scope=" + '"' + "row"  + '"' + ">"  + data[i].itemTypeId + "</th>"  +
             "<td>" + data[i].itemName + "</td>" +
-	        "<td><input type=" + '"' + "text" + '"' + "id=" + '"' + "text-input" + '"' + "name=" + '"' + "text-input" + '"'+
-	        "placeholder=" + '"' + "0" + '"' + "class=" + '"' + "form-control col-12 " + data[i].itemTypeId + '"' + ">" +  "</td>" + "</tr>");
+	        "<td><input type='text' id='" + data[i].itemTypeId + "_" +  data[i].itemName + "' placeholder='0' class='form-control col-12'></td></tr>");
 	    }
     }
     send("/item/list", "GET", {}, itemList);
@@ -111,10 +110,9 @@
         var item = document.getElementById('search_item').value;
 
         if(item > 0){
-            getItemName(item)
-
-        }else if (item = ""){
-           getItemList()
+            getItemName(item);
+        }else if (item == ""){
+           send("/item/list", "GET", {}, itemList);
         }
 
     };
@@ -159,50 +157,31 @@
         if(itemId == "null" || itemName == "null"){
             alert('無此道具')
         }else{
-            $('#item_list').append(" <tr>" + "<th scope=" + '"' + "row" + '"' + ">"  + itemId + "</th>"  +
+            $('#item_list').append(" <tr class='item_row'>" + "<th scope=" + '"' + "row" + '"' + ">"  + itemId + "</th>"  +
             "<td>" + itemName + "</td>" +
-	        "<td><input type=" + '"' + "text" + '"' + "id=" + '"' + "text-input" + '"' + "name=" + '"' + "text-input" + '"'+
-	        "placeholder=" + '"' + "0" + '"' + "class = " + '"' + "form-control col-12 " + itemId + '"' + ">" +
-	        "</td>" + "</tr>");
+	        "<td><input type='text' id='" + itemId + "_" + itemName + "' placeholder='0' class = 'form-control col-12'></td></tr>");
         }
-
-
     }
 
 <!--    enter-->
 
-    function enter(){
-        $.ajax({
-                url: "/item/list",
-                success: function(res){
-                    console.log(res)
-                    allItems = res
-                    inputAllItems(allItems)
-                },
-                error: function(){
-                    alert('發生錯誤')
-                }
-            })
-    }
 
-    function inputAllItems(data){
-        var itemId,itemCount,obj;
-        for(let i = 0 ; i < data.length ; i++) {
-            itemId = data[i].itemTypeId;
-            itemCount = document.getElementsByClassName(data[i].itemTypeId)[0].value;
 
-            if(itemCount > 0){
-                alert("道具" + itemId + "數量" + itemCount);
-                obj.add(new Option("itemId","itemCount"));
+    function sendItemList(){
+        let list = '';
+        $('tr.item_row').each(function(){
+            if($(this).find('input').val() != '') {
+                let id = $(this).find('input').attr('id');
+                let amount = $(this).find('input').val();
+                list += '<tr><td>' + id.split('_')[1] + '</td>'
+                + '<td>' + '<input value="' + amount + '"' +  'class="form-control item-count"></td>'
+                + '<td><button style="color: #dc3545;border:0cm" type="button" class="form-control ti-trash" onclick="delete()" id=' + id.split('_')[0] + '"></button>'
+                + '<input type="hidden" value="' + id.split('_')[0] + '"></td></tr>';
+
             }
-
-	    }
-
-<!--        window.opener.document.getElementById('LinkButton1').click();-->
-
+        });
+        window.opener.document.getElementById('item_list').innerHTML = list;
     }
-
-
 
     </script>
 
