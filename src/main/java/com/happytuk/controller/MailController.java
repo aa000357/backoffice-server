@@ -2,9 +2,11 @@ package com.happytuk.controller;
 
 import com.happytuk.dao.ExcelMailSenderDao;
 import com.happytuk.dao.MailTemplateDao;
+import com.happytuk.dto.MailTemplateDto;
 import com.happytuk.entity.ExcelMailSender;
 import com.happytuk.entity.MailTemplate;
 import com.happytuk.entity.UserMail;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,27 +22,28 @@ public class MailController {
 
     @Autowired
     private MailTemplateDao mailTemplateDao;
+    private MailTemplateDto mailTemplateDto;
 
-
-//    @PostMapping(value = "/mailtemplate")
-//    public String saveMailTemplate(@RequestBody MailTemplate mailTemplate) {
-//        fakeDb.add(mailTemplate);
-//        return "ok";
-//    }
 
     @PostMapping(value = "/mailtemplate")
-    public String saveMailTemplate(@RequestBody MailTemplate mailTemplate, UserMail userMail) {
+    public String saveMailTemplate(@RequestBody MailTemplateDto mailTemplateDto) {
         MailTemplate newTemplate = new MailTemplate();
 
-        newTemplate.setMailId(mailTemplate.getMailId());
-        newTemplate.setMailType(mailTemplate.getMailType());
-        newTemplate.setSender(mailTemplate.getSender());
-        newTemplate.setMailName(mailTemplate.getMailName());
-        newTemplate.setMailNote(mailTemplate.getMailNote());
-        newTemplate.setSendTime(mailTemplate.getSendTime());
-        newTemplate.setExpiredTime(mailTemplate.getExpiredTime());
-        newTemplate.setCreatedTime(mailTemplate.getCreatedTime());
-        newTemplate.setUpdatedTime(mailTemplate.getUpdatedTime());
+//        mailTemplateDto.getSendTime();
+        System.out.println("send time : " + mailTemplateDto.getSendTime() );
+
+        newTemplate.setSender(mailTemplateDto.getSender());
+        newTemplate.setMailName(mailTemplateDto.getMailName());
+        newTemplate.setMailNote(mailTemplateDto.getMailNote());
+//        newTemplate.setSendTime(mailTemplateDto.getSendTime());
+
+//        newTemplate.setSender(mailTemplate.getSender());
+//        newTemplate.setMailName(mailTemplate.getMailName());
+//        newTemplate.setMailNote(mailTemplate.getMailNote());
+//        newTemplate.setSendTime(mailTemplate.getSendTime());
+//        newTemplate.setExpiredTime(mailTemplate.getExpiredTime());
+//        newTemplate.setCreatedTime(mailTemplate.getCreatedTime());
+//        newTemplate.setUpdatedTime(mailTemplate.getUpdatedTime());
 
 //        mailTemplateDao.setMailId();
 

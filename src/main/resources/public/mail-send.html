@@ -115,7 +115,7 @@
                     <div class="card-body card-block">
                         <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label">伺服器</label></div>
+                                <div class="col col-md-3"><label  class=" form-control-label">伺服器</label></div>
                                 <div class="col-12 col-md-9">
                                     <select name="select" id="selectServ" class="form-control">
                                         <option value="0">台港澳</option>
@@ -126,8 +126,8 @@
                             <div class="row form-group">
                                 <div class="col col-md-3"><label  class=" form-control-label">玩家ID</label></div>
                                 <div class="col-12 col-md-9"><input type="text" id="users" name="text-input" placeholder="玩家ID請用,間隔，請使用半形英文數字" class="form-control">
-                                <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            </div>
+                                    <!-- <small class="form-text text-muted">This is a help text</small> -->
+                                </div>
                             </div>
 
                             <div class="row form-group">
@@ -175,25 +175,27 @@
 
                             <div class="row form-group">
                                 <div class="col col-md-3"><label class=" form-control-label">內文</label></div>
-                                <div class="col-12 col-md-9"><textarea name="textarea-input" id="letter-content" rows="9" placeholder="" class="form-control"></textarea></div>
+                                <div class="col-12 col-md-9"><textarea name="textarea-input" id="mailNote" rows="9" placeholder="" class="form-control"></textarea></div>
                             </div>
-                            
+
                             <div class="row form-group">
                                 <div class="col col-md-3"><label class=" form-control-label">發送時間</label></div>
-                                
-                                <div class="col-12 col-md-3"><input class="form-control" type="text" name="datetimes" id="send-time" /></div>
+
+                                <div class="col-12 col-md-3">
+                                    <input class="form-control" type="text" name="sendtimes" id="send-time" />
+                                </div>
                             </div>
 
                             <div class="row form-group ">
                                 <div class="col col-md-3"><label class=" form-control-label">領取時限</label></div>
-                                <div class="col-12 col-md-3 display-flex">
-                                    <input class="form-control" type="text" name="datetimes" id="expired-time"/>
+                                <div class="col-12 col-md-5 display-flex">
+                                    <input class="form-control" type="text" name="expiredtimes" id="expired-time"/>
 
                                     <div class="col col-md-3"><label class=" form-control-label">永久</label></div>
 
                                     <!-- <label  class="form-control-label">永久</label> -->
                                     <div class="form-check-inline form-check ">
-                                        <label for="inline-checkbox1" class="form-check-label display-flex">
+                                        <label  class="form-check-label display-flex">
                                             <input type="checkbox" id="forever-checkbox" name="inline-checkbox1" value="option1" class="form-check-input">
                                         </label>
                                     </div>
@@ -201,15 +203,15 @@
                             </div>
 
                             <div class="card-body">
-                                <button id = "preview" style="float:right" type="button" class="btn btn-primary btn-sm" onclick="preview()">預覽</button>
-                                <button id = "save" style="float:right" type="button" class="btn btn-primary btn-sm" onclick="save()" hidden="hidden">發送</button>
+                                <button id = "preview" style="float:right" type="button" class="btn btn-primary btn-sm" onclick="gopreview()">預覽</button>
+                                <button id = "save" style="float:right" type="button" class="btn btn-primary btn-sm" onclick="doSave()" hidden="hidden">發送</button>
                                 <label style="float:right" class=" form-control-label">&emsp;</label>
-                                <button id = "modify" style="float:right" type="button" class="btn btn-primary btn-sm" onclick="modify()" hidden="hidden">修改</button>
+                                <button id = "modify" style="float:right" type="button" class="btn btn-primary btn-sm" onclick="gomodify()" hidden="hidden">修改</button>
                             </div>
                         </form>
                     </div>
 
-                    
+
                 </div>
             </div>
         </div>
@@ -221,12 +223,21 @@
     <!-- 日期時間選擇器 -->
     <script>
     $(function() {
-      $('input[name="datetimes"]').daterangepicker({
+      $('input[name="sendtimes"]').daterangepicker({
         singleDatePicker:true,
         timePicker: true,
         startDate: moment().startOf('hour'),
         locale: {
-          format: 'M/DD hh:mm A'
+          format: 'YYYY/MM/DD HH:mm'
+        }
+      });
+
+      $('input[name="expiredtimes"]').daterangepicker({
+        singleDatePicker:true,
+        timePicker: true,
+        startDate: moment().add('year',1),
+        locale: {
+          format: 'YYYY/MM/DD HH:mm'
         }
       });
     });
@@ -239,13 +250,13 @@
         send("/sender", "GET", {}, genOption);
 
 <!--    預覽-->
-    function preview(){
+    function gopreview(){
         document.getElementById("selectServ").disabled = true;
         document.getElementById("users").disabled = true;
         document.getElementById("open-item-list").hidden = true;
         document.getElementById("caption").readOnly = true;
         document.getElementById("sender_list").disabled = true;
-        document.getElementById("letter-content").readOnly = true;
+        document.getElementById("mailNote").readOnly = true;
         document.getElementById("send-time").readOnly = true;
         document.getElementById("expired-time").readOnly = true;
         document.getElementById("forever-checkbox").disabled = true;
@@ -259,13 +270,13 @@
     }
 
 <!--    修改-->
-    function modify(){
+    function gomodify(){
         document.getElementById("selectServ").disabled = false;
         document.getElementById("users").disabled = false;
         document.getElementById("open-item-list").hidden = false;
         document.getElementById("caption").readOnly = false;
         document.getElementById("sender_list").disabled = false;
-        document.getElementById("letter-content").readOnly = false;
+        document.getElementById("mailNote").readOnly = false;
         document.getElementById("send-time").readOnly = false;
         document.getElementById("expired-time").readOnly = false;
         document.getElementById("forever-checkbox").disabled = false;
@@ -278,7 +289,31 @@
         $('#modify').attr("hidden","hidden");
     }
 
+    function doSave(){
+<!--    let dt = new Date($('send-time').val());-->
+    let sendTime = $('#send-time').val() ;
+    let expiredTime = $('#expired-time').val();
+        var param = {
+            "users" : $('#users').val(),
+            "sender" : $('#sender_list').val(),
+            "mailName" : $('#caption').val(),
+            "mailNote" : $('#mailNote').val(),
+            "sendTime" : sendTime,
+            "expiredTime" : expiredTime
+            };
 
+        $.ajax({
+            url : "/mail/mailtemplate",
+            type : 'POST',
+            data : param,
+            success : function (response){
+                alert(response);
+            } ,
+            error: function (){
+                alert("false");
+            }
+        });
+    }
 
     </script>
 </body>

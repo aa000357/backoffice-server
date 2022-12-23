@@ -22,6 +22,7 @@
     <script src="assets/js/plugins.js"></script>
     <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="assets/js/util.js"></script>
 
     <!-- 日曆格式 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/moment.min.js"></script>
@@ -104,39 +105,18 @@
                                                     <th>信件狀態<button type="button" class="btn btn-link btn-sm fa fa-caret-square-o-down"></button></th>
                                                 </tr>
                                             </thead>
-                                            <tbody id = "row">
-                                                <tr>
-                                                    <td>2022-10-19 00:00:00</td>
-                                                    <td>2022-10-19 00:00:00</td>
-                                                    <td>2022-10-19 00:00:00</td>
-                                                    <td>12345678</td>
-                                                    <td>我是標題</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-link btn-sm " onclick="window.open('mail-info.html', '信件內容', config='height=920,width=880');">查看</button>
-                                                    </td>
-                                                    <td>未發送 <button type="button" class="btn btn-secondary btn-sm">取消</button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2022-10-20 00:00:00</td>
-                                                    <td>2022-10-20 00:00:00</td>
-                                                    <td>2022-10-20 00:00:00</td>
-                                                    <td>12345678</td>
-                                                    <td>我是標題</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-link btn-sm " onclick="window.open('mail-info.html', '信件內容', config='height=920,width=880');">查看</button>
-                                                    </td>
-                                                    <td>已發送 <button disabled="disabled" type="button" class="btn btn-secondary btn-sm">取消</button></td>
-                                                </tr>
+                                            <tbody id = "mail-temp-list">
+
 <!--                                                <tr>-->
-<!--                                                    <td>2022-10-20 00:00:00</td>-->
-<!--                                                    <td>2022-10-20 00:00:00</td>-->
-<!--                                                    <td>2022-10-20 00:00:00</td>-->
+<!--                                                    <td>2022-10-19 00:00:00</td>-->
+<!--                                                    <td>2022-10-19 00:00:00</td>-->
+<!--                                                    <td>2022-10-19 00:00:00</td>-->
 <!--                                                    <td>12345678</td>-->
 <!--                                                    <td>我是標題</td>-->
 <!--                                                    <td>-->
 <!--                                                        <button type="button" class="btn btn-link btn-sm " onclick="window.open('mail-info.html', '信件內容', config='height=920,width=880');">查看</button>-->
 <!--                                                    </td>-->
-<!--                                                    <td>已發送 <button disabled="disabled" type="button" class="btn btn-secondary btn-sm">取消</button></td>-->
+<!--                                                    <td>未發送 <button type="button" class="btn btn-secondary btn-sm">取消</button></td>-->
 <!--                                                </tr>-->
 <!--                                                <tr>-->
 <!--                                                    <td>2022-10-20 00:00:00</td>-->
@@ -200,30 +180,6 @@
         $("input.default").daterangepicker();
     </script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-        $("#search").click(function(){
-         mailtemplist = $.ajax({
-                            method : "POST",
-                            url : "/mail/mailtemp",
-                            data : {
-                                mail_type:"3"
-                            },
-                            success: res =>{
-                                console.log("ok")
-
-                                },
-                            error: err =>{
-                                console.log("error")
-                                },
-                        });
-						});
-
-        });
-
-
-
-    </script>
 
 </body>
 </html>
