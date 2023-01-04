@@ -1,20 +1,17 @@
 package com.happytuk.controller;
 
-import com.happytuk.dao.ExcelMailSenderDao;
 import com.happytuk.dao.MailTemplateDao;
 import com.happytuk.dto.MailTemplateDto;
-import com.happytuk.entity.ExcelMailSender;
 import com.happytuk.entity.MailTemplate;
-import com.happytuk.entity.UserMail;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/mail")
 public class MailController {
 
@@ -29,23 +26,11 @@ public class MailController {
     public String saveMailTemplate(@RequestBody MailTemplateDto mailTemplateDto) {
         MailTemplate newTemplate = new MailTemplate();
 
-//        mailTemplateDto.getSendTime();
         System.out.println("send time : " + mailTemplateDto.getSendTime() );
 
         newTemplate.setSender(mailTemplateDto.getSender());
         newTemplate.setMailName(mailTemplateDto.getMailName());
         newTemplate.setMailNote(mailTemplateDto.getMailNote());
-//        newTemplate.setSendTime(mailTemplateDto.getSendTime());
-
-//        newTemplate.setSender(mailTemplate.getSender());
-//        newTemplate.setMailName(mailTemplate.getMailName());
-//        newTemplate.setMailNote(mailTemplate.getMailNote());
-//        newTemplate.setSendTime(mailTemplate.getSendTime());
-//        newTemplate.setExpiredTime(mailTemplate.getExpiredTime());
-//        newTemplate.setCreatedTime(mailTemplate.getCreatedTime());
-//        newTemplate.setUpdatedTime(mailTemplate.getUpdatedTime());
-
-//        mailTemplateDao.setMailId();
 
         return "ok";
     }
@@ -70,6 +55,7 @@ public class MailController {
         List<MailTemplate> templateList = mailTemplateDao.findAll();
         Integer count = templateList.size();
         System.out.println("count : " + count);
+        System.out.println("templateList : " + templateList);
 
         return templateList;
     }

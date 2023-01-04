@@ -133,7 +133,7 @@
                             <div class="row form-group">
                                 <div class="col col-md-3"><label class=" form-control-label">發送道具</label></div>
                                 <div class="col-12 col-md-9" id = "open-item-list">
-                                    <button class="btn btn-primary btn-sm" onclick='showModal()'>
+                                    <button class="btn btn-primary btn-sm" >
                                         <a style="color:#fff ;" href="#" onclick="window.open('item-type-list.html', '道具列表', config='height=800,width=1200');">開新視窗</a>
                                     </button>
                                 </div>
@@ -147,6 +147,7 @@
                                         <table class="table" >
                                             <thead>
                                             <tr>
+                                                <th scope="col">道具ID</th>
                                                 <th scope="col">道具名稱</th>
                                                 <th scope="col">道具數量</th>
                                                 <th scope="col"></th>
@@ -226,7 +227,7 @@
       $('input[name="sendtimes"]').daterangepicker({
         singleDatePicker:true,
         timePicker: true,
-        startDate: moment().startOf('hour'),
+        startDate: moment().startOf(),
         locale: {
           format: 'YYYY/MM/DD HH:mm'
         }
@@ -235,7 +236,7 @@
       $('input[name="expiredtimes"]').daterangepicker({
         singleDatePicker:true,
         timePicker: true,
-        startDate: moment().add('year',1),
+        startDate: moment().add(1, 'year'),
         locale: {
           format: 'YYYY/MM/DD HH:mm'
         }
@@ -290,7 +291,6 @@
     }
 
     function doSave(){
-<!--    let dt = new Date($('send-time').val());-->
     let sendTime = $('#send-time').val() ;
     let expiredTime = $('#expired-time').val();
         var param = {
@@ -302,19 +302,32 @@
             "expiredTime" : expiredTime
             };
 
+<!--    $.post("/mail/mail-template",{-->
+<!--            "users" : $('#users').val(),-->
+<!--            "sender" : $('#sender_list').val(),-->
+<!--            "mailName" : $('#caption').val(),-->
+<!--            "mailNote" : $('#mailNote').val(),-->
+<!--            "sendTime" : sendTime,-->
+<!--            "expiredTime" : expiredTime},-->
+<!--             function (date){-->
+<!--                alert(data);-->
+<!--             },"json");-->
+
         $.ajax({
-            url : "/mail/mailtemplate",
             type : 'POST',
+            url : "/mail/mail-template/",
+            async: false,
             data : param,
-            success : function (response){
-                alert(response);
-            } ,
+            dataType: 'json',
+            success : function (data){
+                alert(data);
+            },
             error: function (){
                 alert("false");
             }
-        });
+        })
     }
 
     </script>
-</body>
+    </body>
 </html>

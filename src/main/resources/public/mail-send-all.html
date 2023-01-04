@@ -24,6 +24,11 @@
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <script src="assets/js/util.js"></script>
 
+    <!-- 日期時間選擇器 -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <style>
         .display-flex {display: flex;}
@@ -133,6 +138,7 @@
                                         <table class="table" >
                                             <thead>
                                             <tr>
+                                                <th scope="col">道具ID</th>
                                                 <th scope="col">道具名稱</th>
                                                 <th scope="col">道具數量</th>
                                                 <th scope="col"></th>
@@ -166,13 +172,13 @@
                             
                             <div class="row form-group">
                                 <div class="col col-md-3"><label lass=" form-control-label">發送時間</label></div>
-                                <div class="col-12 col-md-3"><input class="form-control datepicker" type="text" id = "send-time"></div>
+                                <div class="col-12 col-md-3"><input class="form-control" type="text" name="sendtimes" id = "send-time"></div>
                             </div>
 
                             <div class="row form-group ">
                                 <div class="col col-md-3"><label class=" form-control-label">領取時限</label></div>
                                 <div class="col-12 col-md-3 display-flex">
-                                    <input class="form-control datepicker" type="text" id="expired-time">
+                                    <input class="form-control" type="text" name="expiredtimes" id="expired-time">
 
                                     <div class="col col-md-3"><label  class=" form-control-label">永久</label></div>
 
@@ -216,8 +222,24 @@
     <script>w3.includeHTML();</script>
     <!-- 自定義樣式 -->
         <script>
-            $(function() {
-              $( ".datepicker" ).datepicker();
+           $(function() {
+              $('input[name="sendtimes"]').daterangepicker({
+                singleDatePicker:true,
+                timePicker: true,
+                startDate: moment().startOf(),
+                locale: {
+                  format: 'YYYY/MM/DD HH:mm'
+                }
+              });
+
+              $('input[name="expiredtimes"]').daterangepicker({
+                singleDatePicker:true,
+                timePicker: true,
+                startDate: moment().add(1, 'year'),
+                locale: {
+                  format: 'YYYY/MM/DD HH:mm'
+                }
+              });
             });
     
             // When the user clicks on div, open the popup
@@ -278,5 +300,5 @@
         $('#modify').attr("hidden","hidden");
     }
         </script>
-</body>
+    </body>
 </html>

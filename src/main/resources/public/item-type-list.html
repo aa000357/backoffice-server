@@ -39,7 +39,7 @@
         </div>
 
         <div class="row form-group">
-            <div style="text-align: center" class="col col-md-2"><label for="select" class=" form-control-label">道具編號</label></div>
+            <div style="text-align: center" class="col col-md-2"><label  class=" form-control-label">道具編號</label></div>
             <div><input class="form-control " type="text" id = "search_item"/></div>
             
             <button style="padding: .25rem 3.5rem;" type="button" class="btn btn-primary btn-sm fa fa-search" id = "search_btn" >查詢</button>
@@ -63,36 +63,12 @@
 
     </div>
     <div class="pop-up-action flex justifyContent">
-      <button class="btn btn-primary btn-sm" onclick='closeModal()'>取消</button>
+      <button class="btn btn-primary btn-sm"><a style="color:#fff" href="javascript:window.close();">取消</a></button>
       <button class="btn btn-primary btn-sm" onclick='sendItemList()' id = "send">確定送出</button>
     </div>
 
       <!-- 自定義樣式 -->
   <script>
-    function showModal(){
-
-      const modalWrap =  document.querySelector('.pop-up-container');
-
-      const popup =  modalWrap.querySelector('.pop-up-box');
-
-      modalWrap.style.display = 'flex';
-      popup.style.transform = 'scale(0)';
-
-      setTimeout(()=>  popup.style.transform = 'scale(1)',0)
-    }
-
-    function closeModal(){
-
-    const modalWrap =  document.querySelector('.pop-up-container');
-
-    const popup =  modalWrap.querySelector('.pop-up-box');
-
-    popup.style.transform = 'scale(0)';
-
-    setTimeout(()=> modalWrap.style.display = 'none',300)
-
-    }
-
 <!--     取得道具列表-->
     function itemList(data){
         for(let i = 0 ; i < data.length ; i++) {
@@ -173,10 +149,10 @@
             if($(this).find('input').val() != '') {
                 let id = $(this).find('input').attr('id');
                 let amount = $(this).find('input').val();
-                list += '<tr><td>' + id.split('_')[1] + '</td>'
+                list += '<tr><td id = '  + id.split('_')[0] + '>' + id.split('_')[0] + '</td>'
+                + '<td>' + id.split('_')[1] + '</td>'
                 + '<td>' + '<input value="' + amount + '"' +  'class="form-control item-count"></td>'
-                + '<td><button style="color: #dc3545;border:0cm" type="button" class="form-control ti-trash" onclick="delete()" id=' + id.split('_')[0] + '"></button>'
-                + '<input type="hidden" value="' + id.split('_')[0] + '"></td></tr>';
+                + '<td><button style="color: #dc3545;border:0cm" type="button" class="form-control ti-trash" onclick="delete()" id=' + id.split('_')[0] + '"></button>' + '</td></tr>';
 
             }
         });

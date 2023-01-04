@@ -64,7 +64,7 @@
                             <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="row form-group">
                                     <div class=" col-sm-2"> <!-- col-12 -->
-                                        <select name="select" id="select" class="form-control">
+                                        <select name="select"  class="form-control">
                                             <option value="0">台港澳</option>
                                             <option value="1" selected>測試服</option>
                                         </select>
@@ -73,7 +73,7 @@
                                     <div><input class="form-control default" type="text"/></div> 
                                     <!-- /信件創建時間 -->
                                     <div class=" col-sm-2"> <!-- col-12 -->
-                                        <select name="select" id="select" class="form-control">
+                                        <select name="select" class="form-control">
                                             <option value="0">暱稱</option>
                                             <option value="1">玩家編號</option> <!--(8碼)-->
                                             <option value="2">帳號ID</option><!--訪客 FB 第三方登入-->
@@ -81,7 +81,7 @@
                                         </select>
                                     </div>
                                     <div><input class="form-control " type="text"/></div>
-                                    <button id = "search" style="padding: .25rem 3.5rem;" type="button" class="btn btn-primary btn-sm fa fa-search">查詢</button>
+                                    <button id = "search" style="padding: .25rem 3.5rem;" type="button" class="btn btn-primary btn-sm fa fa-search" onclick="getTempList()">查詢</button>
                                 </div>
 
                                 <div class="row form-group">
@@ -138,7 +138,7 @@
 
                         <div style="margin-left: 100px;" class="row display-flex">
                             <div>
-                                <label>共12345條</label>
+                                <label>共條</label>
                                 <select name="selectSm" id="selectSm" class="form-control-sm">
                                     <option value="0">10條/頁</option>
                                     <option value="1">20條/頁</option>
@@ -178,8 +178,44 @@
     <!-- 自定義樣式 -->
     <script>
         $("input.default").daterangepicker();
+
+
+<!--        send("/mail/allmailtemplate", "GET", {}, mailTemplate);-->
+
+        $(document).ready(function(){
+            $('#mail-temp-list').append(" <tr class='item_row'>" + "<td>"  + "111" + "</td>"  +
+						                "<td>"  + "222" + "</td>"  +
+							            "<td>"  + "333" + "</td>"  +
+							            "<td>"  + "發送對象" + "</td>"  +
+							            "<td>"  + "444" + "</td>"  +
+							            "<td>"  + "<button type='button' class='btn btn-primary btn-sm' onclick="openMailTemp()" >查看</button>" + "</td>"  +
+							            "<td>"  + "未發送" + "<button disabled='disabled' type='button' class='btn btn-secondary btn-sm'>取消</button>" +"</td> </tr>");
+        });
+
+
+
+
+        function getTempList() {
+            $.ajax({
+                url: "/mail/allmailtemplate",
+                success: function(res){
+                    console.log(res)
+                    items = res
+                    alert(items);
+                },
+                error: function(){
+                    alert('發生錯誤')
+                }
+            })
+
+        }
+
+        openMailTemp
+
     </script>
 
 
-</body>
+
+
+    </body>
 </html>
