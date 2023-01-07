@@ -10,6 +10,7 @@ public class MailTemplateDto {
     private String sender;
     private String mailName;
     private String mailNote;
+    private String createdTime;
     private String sendTime;
     private String expiredTime;
 

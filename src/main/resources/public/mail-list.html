@@ -106,32 +106,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody id = "mail-temp-list">
-
-<!--                                                <tr>-->
-<!--                                                    <td>2022-10-19 00:00:00</td>-->
-<!--                                                    <td>2022-10-19 00:00:00</td>-->
-<!--                                                    <td>2022-10-19 00:00:00</td>-->
-<!--                                                    <td>12345678</td>-->
-<!--                                                    <td>我是標題</td>-->
-<!--                                                    <td>-->
-<!--                                                        <button type="button" class="btn btn-link btn-sm " onclick="window.open('mail-info.html', '信件內容', config='height=920,width=880');">查看</button>-->
-<!--                                                    </td>-->
-<!--                                                    <td>未發送 <button type="button" class="btn btn-secondary btn-sm">取消</button></td>-->
-<!--                                                </tr>-->
-<!--                                                <tr>-->
-<!--                                                    <td>2022-10-20 00:00:00</td>-->
-<!--                                                    <td>2022-10-20 00:00:00</td>-->
-<!--                                                    <td>2022-10-20 00:00:00</td>-->
-<!--                                                    <td>12345678</td>-->
-<!--                                                    <td>我是標題</td>-->
-<!--                                                    <td>-->
-<!--                                                        <button type="button" class="btn btn-link btn-sm " onclick="window.open('mail-info.html', '信件內容', config='height=920,width=880');">查看</button>-->
-<!--                                                    </td>-->
-<!--                                                    <td>已發送 <button disabled="disabled" type="button" class="btn btn-secondary btn-sm">取消</button></td>-->
-<!--                                                </tr>-->
                                             </tbody>
                                         </table>
-                                    </div> <!-- /.table-stats -->
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -177,40 +154,38 @@
     <script>w3.includeHTML();</script>
     <!-- 自定義樣式 -->
     <script>
-        $("input.default").daterangepicker();
+<!--        $("input.default").daterangepicker();-->
 
-
-<!--        send("/mail/allmailtemplate", "GET", {}, mailTemplate);-->
-
-        $(document).ready(function(){
-            $('#mail-temp-list').append(" <tr class='item_row'>" + "<td>"  + "111" + "</td>"  +
-						                "<td>"  + "222" + "</td>"  +
-							            "<td>"  + "333" + "</td>"  +
+        function mailTemplate(data){
+            for(let i = 0 ; i < data.length ; i++) {
+                $('#mail-temp-list').append(" <tr class='item_row'>" + "<td>"  + data[i].createdTime + "</td>"  +
+						                "<td>"  + data[i].sendTime + "</td>"  +
+							            "<td>"  + data[i].expiredTime + "</td>"  +
 							            "<td>"  + "發送對象" + "</td>"  +
-							            "<td>"  + "444" + "</td>"  +
-							            "<td>"  + "<button type='button' class='btn btn-primary btn-sm' onclick="openMailTemp()" >查看</button>" + "</td>"  +
+							            "<td>"  + data[i].mailName + "</td>"  +
+							            "<td>"  + "<button type='button' class='btn btn-primary btn-sm' onclick='openMailTemp()' >查看</button>" + "</td>"  +
 							            "<td>"  + "未發送" + "<button disabled='disabled' type='button' class='btn btn-secondary btn-sm'>取消</button>" +"</td> </tr>");
-        });
-
-
-
-
-        function getTempList() {
-            $.ajax({
-                url: "/mail/allmailtemplate",
-                success: function(res){
-                    console.log(res)
-                    items = res
-                    alert(items);
-                },
-                error: function(){
-                    alert('發生錯誤')
-                }
-            })
-
+	        }
         }
+        send("/mail/allmailtemplate", "GET", {}, mailTemplate);
 
-        openMailTemp
+<!--        function getTempList() {-->
+<!--            $.ajax({-->
+<!--                url: "/mail/allmailtemplate",-->
+<!--                success: function(res){-->
+<!--                    console.log(res)-->
+<!--                    items = res-->
+<!--                    alert(items);-->
+<!--                },-->
+<!--                error: function(){-->
+<!--                    alert('發生錯誤')-->
+<!--                }-->
+<!--            })-->
+
+<!--        }-->
+
+
+<!--        function openMailTemp(){        }-->
 
     </script>
 

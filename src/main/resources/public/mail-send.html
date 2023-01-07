@@ -294,30 +294,19 @@
     let sendTime = $('#send-time').val() ;
     let expiredTime = $('#expired-time').val();
         var param = {
-            "users" : $('#users').val(),
-            "sender" : $('#sender_list').val(),
-            "mailName" : $('#caption').val(),
-            "mailNote" : $('#mailNote').val(),
-            "sendTime" : sendTime,
-            "expiredTime" : expiredTime
-            };
-
-<!--    $.post("/mail/mail-template",{-->
-<!--            "users" : $('#users').val(),-->
-<!--            "sender" : $('#sender_list').val(),-->
-<!--            "mailName" : $('#caption').val(),-->
-<!--            "mailNote" : $('#mailNote').val(),-->
-<!--            "sendTime" : sendTime,-->
-<!--            "expiredTime" : expiredTime},-->
-<!--             function (date){-->
-<!--                alert(data);-->
-<!--             },"json");-->
+            "users": "ffff",
+            "sender": "金幣(遊戲幣)",
+            "mailName": "ffff",
+            "mailNote": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeffffddd",
+            "sendTime": "2023/01/07 13:58",
+            "expiredTime": "2023/01/07 13:58"
+        };
 
         $.ajax({
             type : 'POST',
-            url : "/mail/mail-template/",
+            url : "/mail/newmailtemplate",
             async: false,
-            data : param,
+            data :  param,
             dataType: 'json',
             success : function (data){
                 alert(data);
