@@ -19,7 +19,6 @@ import java.util.Optional;
 public class MailController {
 
     private static List<MailTemplate> CoffeeDb = new ArrayList<>();
-    private static List<JSONObject> responseMailTemplate = new ArrayList<JSONObject>();
 
 
     @Autowired
@@ -56,42 +55,36 @@ public class MailController {
     }
 
     @GetMapping(value = "/allmailtemplate")
-    public List<String> getMailTemplateList() throws JSONException {
-        String fCreatedTime = "";
-        String fSendTime = "";
-        String fExpireTime = "";
+    public List<MailTemplateDto> getMailTemplateList() throws JSONException {
+
 
         List<MailTemplate> templateList = mailTemplateDao.findAll();
-        List<String> rTemplateList = new ArrayList<>();
-        JSONObject object = new JSONObject();
-        responseMailTemplate.clear(); //將list清空
+        List<MailTemplateDto> rTemplateList = new ArrayList<>();
 
-
-//        rTemplateList.addAll(templateList);
         System.out.println(templateList);
         Integer count = templateList.size();
 
         for(int i = 0 ; i < count ; i++){
 
-            fCreatedTime = dateToString(templateList.get(i).getCreatedTime());
-            fSendTime = dateToString(templateList.get(i).getSendTime());
-            fExpireTime = dateToString(templateList.get(i).getExpiredTime());
+            String fCreatedTime = dateToString(templateList.get(i).getCreatedTime());
+            String fSendTime = dateToString(templateList.get(i).getSendTime());
+            String fExpireTime = dateToString(templateList.get(i).getExpiredTime());
 
 //            JSON
-            object.put("users" , "USER");
-            object.put("sender" , "SENDER");
-            object.put("mailName" , templateList.get(i).getMailName());
-            object.put("mailNote" , templateList.get(i).getMailNote());
-            object.put("createdTime" , fCreatedTime);
-            object.put("sendTime" , fSendTime);
-            object.put("expiredTime" , fExpireTime);
-
-            responseMailTemplate.add(i,object);
+            MailTemplateDto dto = new MailTemplateDto();
+            dto.setUsers( "USER");
+            dto.setSender("SENDER");
+            dto.setMailName( templateList.get(i).getMailName());
+            dto.setMailNote( templateList.get(i).getMailNote());
+            dto.setCreatedTime(fCreatedTime);
+            dto.setSendTime(fSendTime);
+            dto.setExpiredTime(fExpireTime);
+            rTemplateList.add(dto);
         }
 
 
         System.out.println("count : " + count);
-        System.out.println("templateList : " + responseMailTemplate);
+        System.out.println("rTemplateList : " + rTemplateList);
 
         return rTemplateList;
     }
